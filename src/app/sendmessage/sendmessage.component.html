@@ -1,0 +1,87 @@
+<div class="container bg-white w-3/5 m-auto py-6 px-4 rounded-xl shadow-xl mt-4">
+
+  <div *ngIf="success" class="susscess absolute bg-white border-green-500 py-2 px-4 rounded-lg shadow-lg top-10 right-5 flex justify-between border ">
+    <p>
+      message sent succesfuly
+    </p>
+
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mt-1 ml-4 cursor-pointer"
+     (click)="success = false">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+
+  </div>
+
+  <form class="pt-6 "  >
+
+
+    <input type="file" class="file-input mb-2"
+    (change)="fileChanged($event)" #fileUpload>
+
+
+
+    <textarea name="originalMsg"   [(ngModel)]="originalMsg" *ngIf="showFile" readonly id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 " placeholder="{{originalMsg}}"></textarea>
+
+
+    <button class="block mb-2" (click)="uploadDocument()">Read file</button>
+
+    <div *ngIf="!showFile" class="relative z-0 mb-6 w-full group">
+        <input  [(ngModel)]="originalMsg"  type="text" name="searchTxt" id="searchTxt" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+        <label for="searchTxt" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Enter a text to crypt</label>
+    </div>
+
+    <label for="methods" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Choose a methode</label>
+        <select required (change)="yesnoCheck($event.target)" [(ngModel)]="methode" name="methode"  id="methods" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full   p-2.5">
+            <option [value] ="0">Miroir</option>
+            <option [value] ="1">Affine</option>
+            <option [value] ="2">Decalage</option>
+            <option [value] ="3">Cesar</option>
+        </select>
+
+
+
+
+
+    <div *ngIf="showAandB" id="valueOfaAndb" class="grid md:grid-cols-2 md:gap-6 mt-4 ">
+        <div class="relative z-0 mb-6 w-full group">
+            <input  type="text" name="valueOfa" id="valueOfa" [(ngModel)]="valueOfa"   class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+            <label for="valueOfa" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">value of a</label>
+        </div>
+        <div class="relative z-0 mb-6 w-full group">
+            <input type="text" name="valueOfb" [(ngModel)]="valueOfb"   id="valueOfb" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+            <label for="valueOfb" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Value of b</label>
+        </div>
+    </div>
+
+    <div *ngIf="shown" id="invalueOfn" class="relative z-0 mb-6 w-full group  mt-4">
+        <input type="text" name="valueOfn" [(ngModel)]="valueOfn"  id="valueOfn" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+        <label for="valueOfn" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">value of n</label>
+    </div>
+
+    <label for="toUser" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Send to</label>
+    <select required [(ngModel)]="toUser" name="toUser"  id="toUser" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full   p-2.5">
+        <option  [value] ="user.id" *ngFor="let user of allUsers">{{ dcesar(user.name,3)}}</option>
+
+    </select>
+
+    <div class="bnts flex space-x-3 mt-4 mb-4">
+      <button (click)="onCrypte()" type="button" class="w-1/2  space-x-3 px-4 py-2  hover:bg-blue-500 cursor-pointer bg-blue-400 text-white rounded-xl" id="sumbiteCrypt"> Crypter</button>
+
+      <button (click)="send()" type="button" class="w-1/2 flex justify-center   px-4 py-2  hover:bg-blue-500 cursor-pointer bg-blue-400 text-white rounded-xl" id="sumbiteDeCrypt">
+        <p>Send</p>
+
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 ml-2 mt-1">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+        </svg>
+
+
+      </button>
+
+
+    </div>
+  </form>
+
+  <div *ngIf="notValid" class="errors">
+    <p class="text-red-500 font-medium pl-2">Pleas fill all of the data</p>
+  </div>
+</div>

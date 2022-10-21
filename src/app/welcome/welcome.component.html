@@ -1,0 +1,101 @@
+<div class="container bg-white w-96 m-auto pt-6 pb-4 px-4 shadow-xl rounded-xl ">
+    <!-- <a routerLink="home" class="bg-blue-500 px-4 py-1 rounded-md text-white cursor-pointer" > -->
+
+
+      <div *ngIf="!singup"  class="login">
+
+
+
+
+        <form>
+          <div class="">
+            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email </label>
+            <input [(ngModel)]="email" name="email" type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Alice" required="">
+          </div>
+          <div class="mb-6">
+            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">password</label>
+            <input [disabled]="showError" [ngClass]="showError? 'border-red-500' : '' "  [(ngModel)]="password" name="password" type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
+          </div>
+
+        </form>
+
+
+        <div class="btns flex space-x-4">
+          <button [disabled]="showError" [ngClass]="showError? 'disabled bg-blue-300 cursor-not-allowed' : '' " class="bg-blue-500 px-4 py-1  rounded-md text-white cursor-pointer w-1/2 text-center" (click)="in()">LogIn</button>
+          <button [ngClass]="showError? 'disabled bg-blue-300 cursor-not-allowed' : '' " class="bg-blue-500 px-4 py-1  rounded-md text-white cursor-pointer w-1/2 text-center">
+            <a routerLink="home" class="" >Go</a>
+          </button>
+
+
+
+        </div>
+
+
+
+        <p *ngIf="error" class="text-sm text-red-500  mt-2">the data is invalid</p>
+
+
+        <button class="mt-4  text-xs font-medium to hover:text-blue-500" (click)="singup= true"  >you Don't have an account?</button>
+
+        <div *ngIf="showWarning" class="p-4 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg relative mt-4 " role="alert">
+          <span class="font-medium">Warning!!!</span> You {{5- tryingNumber}} have more tries.
+          <svg  fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 absolute right-4 top-5 hover:w-5 hover:h-5 cursor-pointer">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+
+        </div>
+
+        <div *ngIf="showError"  class="p-4 mt-4  text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+          <span class="font-medium"></span> Sorry,You seems like you dont own this account
+        </div>
+
+        <div *ngIf="showBigError"  class="p-4 mt-4  text-sm bg-green-100 text-black  rounded-lg " role="alert">
+          We've send u an email at:
+          <span  class="font-bold"> {{email}}</span>
+        </div>
+
+        <div *ngIf="showError" class="text-xs m-4">
+          u can try in : {{ timeTotryAgain}}
+
+        </div>
+
+      </div>
+
+      <div *ngIf="singup" class="signup">
+
+
+
+
+        <form>
+          <div class="mb-4">
+            <label for="usernameup" class="block mb-2 text-sm font-medium text-gray-900 ">User name</label>
+            <input [(ngModel)]="usernameup" name="usernameup" type="text" id="usernameup" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Alice" required="">
+          </div>
+
+          <div class="mb-4">
+            <label for="emailup" class="block mb-2 text-sm font-medium text-gray-900 ">Email</label>
+            <input [(ngModel)]="emailup" name="emailup" type="text" id="emailup" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Alice@gmail.com" required="">
+          </div>
+
+          <div class="mb-4">
+            <label for="passwordup" class="block mb-2 text-sm font-medium text-gray-900 ">password</label>
+            <input [(ngModel)]="passwordup" name="passwordup" type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
+          </div>
+
+          <button class="bg-blue-500 px-4 py-1  rounded-md text-white cursor-pointer w-full text-center " (click)="up()">SingUp</button>
+        </form>
+
+
+
+
+
+          <button class="mt-4  text-xs font-medium to hover:text-blue-500" (click)="singup= false"  >You already have an account?</button>
+
+
+
+      </div>
+
+
+      <!-- <button (click)="resetPassword()" class="m-10 p-10 text-red-600">RESET password</button> -->
+
+</div>

@@ -1,0 +1,36 @@
+<div class="container w-3/5 m-auto my-10 bg-white  pl-4 shadow-xl rounded-xl flex ">
+
+  <form class="py-6 w-1/2" >
+
+
+    <hr>
+    <div class="relative z-0 mb-6 w-full group mt-10 ">
+        <input value="{{cryptedText}}"  readonly  type="text" name="resultTxt" id="resultTxt" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+        <label for="resultTxt" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">the crypted text is </label>
+    </div>
+
+    <label for="methods" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Choose a methode to decrypt this message</label>
+    <select  [(ngModel)]="methode" name="methode"  id="methods" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full   p-2.5">
+        <option [value] ="0" > Miroir</option>
+        <option [value] ="1">Affine</option>
+        <option [value] ="2">Decalage</option>
+        <option [value] ="3">Cesar</option>
+    </select>
+
+    <div class="relative z-0 mt-4 mb-6 w-full group">
+        <input value="{{dcryptedText}}"   readonly  type="text" name="originalWord" id="originalWord" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+        <label  for="resultTxt" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">the decypted message is </label>
+    </div>
+
+
+        <button (click)="onDeCrypte()" type="button" class="px-4 py-2 mt-4 hover:bg-blue-500 cursor-pointer bg-blue-400 text-white rounded-xl" id="sumbiteDeCrypt"> De Crypter</button>
+</form>
+
+
+<div class="img w-1/2 bg-red-300 rounded-xl">
+  <!-- <img src="../../assets/serrure-de-chiffrage-de-digital-36703214.jpg" class="w-full h-full rounded-xl" alt=""> -->
+  <img src="../../assets/key.png" class="w-full h-full rounded-xl" alt="">
+
+</div>
+
+</div>
