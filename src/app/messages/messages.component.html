@@ -1,13 +1,13 @@
-<div class="container w-4/5 flex justify-start space-x-10 m-auto  ">
+<div class="container w-4/5 flex justify-start space-x-10 m-auto  pt-6 ">
+  <h4 class="text-blue-500 font-bold pl-4 fixed left-72  top-20 px-4 rounded-lg bg-white pb-2 pt-2">List of Messages</h4>
 
-  <div class="msgs bg-white shadow-xl rounded-lg py-4 w-96 " >
-    <h4 class="text-blue-500 mb-4 font-bold pl-4">List of Messages</h4>
+  <div class="msgs bg-white shadow-xl rounded-lg py-4 pt-10 w-96 h-96 overflow-y-scroll mt-6 " >
 
 
 
 
     <div *ngFor="let msg of messages" class="mesage ">
-      <p class="hover:bg-gray-200 py-2 px-4 cursor-pointer" (click)="onSend(msg.message)">
+      <p class="hover:bg-gray-200 py-2 px-4 cursor-pointer" (click)="onSend(msg.message,msg.valueofa,msg.valueofb,msg.valueofn)">
         {{ msg.message }}
       </p>
     </div>

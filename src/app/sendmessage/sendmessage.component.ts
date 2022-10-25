@@ -23,6 +23,7 @@ export class SendmessageComponent implements OnInit {
   allUsers: any;
   success = false;
   notValid = false;
+  showaffineerror = false;
 
   getUsers() {
     this.userService.getUsers().subscribe(users => {
@@ -37,7 +38,6 @@ export class SendmessageComponent implements OnInit {
 
 
     if(this.originalMsg.length < 1) {
-      console.log(876543);
 
       this.notValid = true;
 
@@ -81,9 +81,39 @@ export class SendmessageComponent implements OnInit {
 
   onCrypte() {
 
+    if(this.originalMsg.length < 1) {
+
+      this.notValid = true;
+
+      return;
+    }
+
+    this.notValid = false
+
+
+    // console.log(this.decalaged("bonjour"));
+    // console.log(this.shift(['b', 'o', 'n', 'j', 'o' , 'u' , 'r'], 1,1));
+
+    // return;
+
+
 
 
     // console.log(this.affine("ryan" , 5,3));
+
+
+    // console.log(this.cryptAffine(3,4,"b"));
+    // console.log(this.cryptAffine(3,4,"y"));
+    // console.log(this.cryptAffine(3,4,"a"));
+    // console.log(this.cryptAffine(3,4,"n"));
+    console.log('------');
+
+    // console.log(this.affine("ryan" , 3,4));
+//
+
+
+
+
 
 
 
@@ -104,7 +134,16 @@ export class SendmessageComponent implements OnInit {
       // this.cryptedText = "function on progress...";
 
     }else if (this.methode == "2") {
-      this.cryptedText = this.decalageD(this.originalMsg);
+
+      let oarry = this.originalMsg.split("");
+
+      // console.log(oarry);
+
+      // return
+
+
+
+      this.cryptedText = this.shift(oarry,1,1);
 
 
     }else {
@@ -125,6 +164,7 @@ export class SendmessageComponent implements OnInit {
     let c2 = 0;
     let c:any=[];
     let alphabet = ["a","b","c","d","e","f","g","h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r","s","t","u","v","w","x","y","z"];
+    let numbers= ["0","1","2","3","4","5","6","7","8","9"];
 
     for(let i=0; i< alphabet.length; i++) {
         dict[alphabet[i]] = i
@@ -134,9 +174,18 @@ export class SendmessageComponent implements OnInit {
     for(let n=0; n< message.length; n++) {
         if(message[n] == " ") {
             c = c + " "
+        }else if (numbers.includes( message[n])) {
+
+
+          c = c + numbers[this.mod( parseInt(k) + numbers.indexOf((message[n])),10)]
         }else {
-            c1 = Math.abs( parseInt(dict[message[n]]) + parseInt(k))
-            c2 = c1 % 26
+          console.log(message[n],dict[message[n]]);
+
+            c1 = ( parseInt(dict[message[n]]) + parseInt(k))
+            console.log(c1,c2,alphabet[c2]);
+
+
+            c2 = this.mod(c1,26)
             c =  c + alphabet[c2]
         }
 
@@ -158,65 +207,25 @@ export class SendmessageComponent implements OnInit {
     return str;
   }
 
-  decalageD(message:any) {
-    let dict: any = {}
-    let c1 = 0;
-    let c2 = 0;
-    let c: any=[];
-    let alphabet = ["a","b","c","d","e","f","g","h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r","s","t","u","v","w","x","y","z"];
-
-    for(let i=0; i< alphabet.length; i++) {
-        dict[alphabet[i]] = i
-
-    }
-
-    for(let n=0; n< message.length; n++) {
-        if(message[n] == " ") {
-            c = c + " "
-        }else {
-            c1 = Math.abs( parseInt(dict[message[n]]) + (1))
-            c2 = c1 % 26
-            c =  c + alphabet[c2]
-        }
 
 
-    }
+  // decalge g and D
 
-    return c
-  }
+  shift(arr:any, direction:any, n:any) {
+    var times = n > arr.length ? n % arr.length : n;
+    let rarray = arr.concat(arr.splice(0, (direction > 0 ? arr.length - times : times)));
 
-  decalageG(message:any) {
-    let dict: any = {}
-    let c1 = 0;
-    let c2 = 0;
-    let c: any=[];
-    let alphabet = ["a","b","c","d","e","f","g","h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r","s","t","u","v","w","x","y","z"];
-
-    let alphabet2 = alphabet.reverse();
+    return rarray.join("");
+    // return arr.concat(arr.splice(0, (direction > 0 ? arr.length - times : times)));
+ }
 
 
 
-    for(let i=0; i< alphabet.length; i++) {
-        dict[alphabet2[i]] = i
+ decalaged(m:any) {
 
-    }
 
-    for(let n=0; n< message.length; n++) {
 
-        if(message[n] == " ") {
-            c = c + " "
-        } else {
-
-            c1 = Math.abs( parseInt(dict[message[n]]) + (1))
-            c2 = c1 % 26
-            c =  c + alphabet2[c2]
-
-        }
-
-    }
-
-    return c
-  }
+ }
 
   dcesar(message:any,k:any) {
 
@@ -274,18 +283,30 @@ cryptAffine(a:any, b:any, I:any):any {
   }
 
   x = alphabet.indexOf(I);
-  y = parseInt((a * x) + (b)) % 26;
+  y = this.mod(parseInt((a * x) + (b)),  26);
 
-  // console.log('affine' , a,b,x,y, alphabet[y]);
 
   return alphabet[y];
 }
 
 
 affine(w:any,a:any,b:any): any {
-
   // console.log(w,a,b);
-  // console.log('pgcd is' +  this.gcd_two_numbers(a,26));
+
+  // return;
+
+
+  // console.log(this.cryptAffine(3,4,w[0]));
+  // console.log(this.cryptAffine(3,4,w[1]));
+  // console.log(this.cryptAffine(3,4,w[2]));
+
+
+
+
+  // return
+
+  // console.log('tesr1' +this.cryptAffine(a,b,"r") );
+  // console.log('tesr2' +this.cryptAffine(3,4,"r") );
 
 
   var word = ' ';
@@ -293,32 +314,32 @@ affine(w:any,a:any,b:any): any {
   if ( this.gcd_two_numbers(a,26)  == 1) {
 
 
-
     for (let  i = 0; i< w.length; i++) {
-      // console.log(this.cryptAffine(5,3,"r"));
-      // console.log(123);
+      // console.log('tesr2' +this.cryptAffine(a,b,"r") );
 
-      // console.log(this.cryptAffine(a,b,i));
+      // console.log(a,b,i,w[i],this.cryptAffine(a,b,w[i]));
+//
 
-      word += this.cryptAffine(a,b,w[i])
 
+      word += this.cryptAffine(parseInt(a), parseInt(b),w[i])
 
     }
 
-
-
+    this.showaffineerror = false;
     return word
 
   }else {
-    // console.log('hhhhhhhh wrong');
-
+    this.showaffineerror = true;
     return 'it is impossible to encrypt this message. choose a prime number with 26.';
   }
 
 }
 
 
-
+swithTOtext() {
+  this.showFile = false;
+  this.originalMsg = '';
+}
 
 // file reader
 
@@ -327,11 +348,12 @@ showFile = false;
 file:any;
 fileChanged(e:any) {
     this.file = e.target.files[0];
-    this.showFile = true
+    // this.showFile = true
 }
 
 
 uploadDocument() {
+  this.showFile = true;
 
   let fileReader = new FileReader();
   fileReader.onload = (e) => {
@@ -356,6 +378,7 @@ uploadDocument() {
 
   ngOnInit(): void {
     this.getUsers();
+    this.notValid = false;
   }
 
 

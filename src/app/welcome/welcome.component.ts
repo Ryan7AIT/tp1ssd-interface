@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { MessageService } from '../message.service';
 import { UserService } from '../user.service';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-welcome',
@@ -9,17 +11,43 @@ import { UserService } from '../user.service';
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor(private messageService: MessageService, private userService: UserService) { }
+  constructor(private messageService: MessageService, private userService: UserService, private recaptchaV3Service: ReCaptchaV3Service, private _renderer: Renderer2) { }
 
   error = false;
 
   password="";
   username="";
-  email=""
+  email="";
+
+  captchavalide = false;
+
+
+  // test recapatcha
+
+
+  resolved(token:any) {
+
+    this.captchavalide = true;
+
+
+  }
+
+
+
+
+
+
+
+
+
+
+  /// end recaptcha
 
   passwordup="";
   usernameup="";
   emailup="";
+
+
 
   singup = false;
 
@@ -28,6 +56,7 @@ export class WelcomeComponent implements OnInit {
   showWarning = false;
   showError= false;
   showBigError = false;
+  succeslogin = false;
 
   timeTotryAgain = 10;
 
@@ -38,7 +67,10 @@ export class WelcomeComponent implements OnInit {
 
 
     this.userService.setNewpass(this.email).subscribe();
+
+    this.showBigError = true
   }
+
 
 
 
@@ -46,7 +78,6 @@ export class WelcomeComponent implements OnInit {
 
     this.messageService.login(this.email, this.password).subscribe((data: any) => {
 
-      console.log(data);
 
       if(localStorage.getItem("userid")){
         localStorage.removeItem("userid");
@@ -59,10 +90,17 @@ export class WelcomeComponent implements OnInit {
 
       localStorage.setItem("userid", data.id);
       localStorage.setItem("username", this.dcesar(data.name,3));
+      this.succeslogin = true;
+
+      setTimeout(() => {
+      this.succeslogin = false;
+
+      }, 4000);
 
       this.error = false;
       this.showError = false;
       this.showWarning = false;
+      this.showReset = false;
 
 
     },(error: any ) => {
@@ -100,6 +138,8 @@ export class WelcomeComponent implements OnInit {
     })
   }
 
+  showReset = false;
+
   timer() {
     if(this.timeTotryAgain == 0) {
       return;
@@ -117,8 +157,11 @@ export class WelcomeComponent implements OnInit {
 
     }, 10000);
 
-    this.showBigError = true
-    this.resetPassword();
+    // this.showBigError = true
+
+    this.showReset = true;
+
+    // this.resetPassword();
 
         //
         // this.showError = false;
@@ -127,6 +170,17 @@ export class WelcomeComponent implements OnInit {
   ngOnInit(): void {
 
     // this.resetPassword();
+
+
+
+    // recapatcha
+
+
+    let script = this._renderer.createElement('script');
+    script.defer = true;
+    script.asycn = true;
+    script.src = "https://www.google.com/recaptcha/api.js";
+    this._renderer.appendChild(document.body,script);
 
 
 

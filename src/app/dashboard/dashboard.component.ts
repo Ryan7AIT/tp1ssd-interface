@@ -65,4 +65,12 @@ export class DashboardComponent implements OnInit {
 }
 
 
+logout() {
+  localStorage.removeItem('userid');
+  localStorage.removeItem('username');
+
+
+}
+
+
 }

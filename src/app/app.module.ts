@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
+
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -13,6 +16,10 @@ import { UsersComponent } from './users/users.component';
 import { MsgDetailsComponent } from './msg-details/msg-details.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SendmessageComponent } from './sendmessage/sendmessage.component';
+import { environment } from '../environments/environment';
+import { CaptchaComponent } from './captcha/captcha.component';
+import {RecaptchaModule, RecaptchaFormsModule} from 'ng-recaptcha'
+
 
 @NgModule({
   declarations: [
@@ -24,15 +31,24 @@ import { SendmessageComponent } from './sendmessage/sendmessage.component';
     UsersComponent,
     MsgDetailsComponent,
     DashboardComponent,
-    SendmessageComponent
+    SendmessageComponent,
+    CaptchaComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    RecaptchaV3Module,
+    RecaptchaFormsModule,
+    RecaptchaModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: RECAPTCHA_V3_SITE_KEY,
+      useValue: environment.recaptcha.siteKey,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

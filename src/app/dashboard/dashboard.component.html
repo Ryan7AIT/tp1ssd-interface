@@ -1,7 +1,7 @@
-<div class="conatiner w-4/5 m-auto my-6  flex justify-between ">
+<div class="conatiner w-4/5 m-auto my-6  flex justify-between  ">
 
 
-  <div class="users w-64 bg-white shadow-xl rounded-xl py-6 ">
+  <div class="users w-64  bg-white shadow-xl rounded-xl py-6 ">
 
     <h4 class="text-center text-blue-500 font-medium text-xl">List Of users</h4>
 
@@ -27,6 +27,29 @@
   </div>
 
 
+  <div class="main bg-white shadow-xl rounded-xl   flex justify-between w-3/5 ">
+
+    <div class="text py-6 px-4 w-3/5">
+
+      <h2 class="text-center font-bold text-xl" >Welcome, <span class="font-medium text-blue-500">{{user}}</span></h2>
+
+
+      <p class="mt-6 leading-8">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis, quia dolorem quidem laudantium enim deserunt! Incidunt illo assumenda ex, sunt ut deserunt voluptates modi optio maiores nihil doloribus repudiandae in?
+      </p>
+
+    </div>
+
+    <div class="img w-2/5">
+      <img src="../../assets/serrure-de-chiffrage-de-digital-36703214.jpg" class="w-full h-full rounded-xl" alt="">
+    </div>
+
+
+
+
+  </div>
+
+
   <div class="name flex  ">
     @{{user}}
     <!-- <svg (click)="onShowMessages()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 ml-2 mt-1 cursor-pointer">
@@ -37,11 +60,40 @@
     <img  (click)="onShowInfo()" src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp" class="w-8 h-8 rounded-full ml-2 cursor-pointer " alt="">
 
 
-    <div *ngIf="showInfo" class="msgs absolute top-32 shadow-xl rounded-lg w-44 py-2 z-10 right-32 bg-white  mt-4">
+    <div *ngIf="showInfo" class="msgs absolute top-28 shadow-xl rounded-lg w-44 py-2 z-10 right-44 bg-white  mt-4">
 
-      <a class="pl-4 hover:bg-gray-200 cursor-pointer block py-1" routerLink="/send">Send a message</a>
-      <a class="pl-4 hover:bg-gray-200 cursor-pointer block py-1" routerLink="/messages">See all messages</a>
-      <a class="pl-4 hover:bg-gray-200 cursor-pointer block py-1" routerLink="welcome">Logout</a>
+      <div class="flex justify-between hover:bg-gray-200 cursor-pointer px-4 py-1">
+      <a class=" py-1" routerLink="/send">Send a message</a>
+
+        <svg  fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mt-2 cursor-pointer">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+        </svg>
+      </div>
+
+
+
+
+      <div class="flex justify-between hover:bg-gray-200 cursor-pointer px-4 py-1">
+        <a class="  block py-1" routerLink="/messages">See all messages</a>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 ml-2 mt-2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+        </svg>
+
+      </div>
+
+      <div class="flex justify-between hover:bg-gray-200 cursor-pointer px-4 py-1">
+
+        <a (click)="logout()" class=" py-1" routerLink="/welcome">Logout</a>
+
+
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 ml-2 mt-2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
+        </svg>
+
+      </div>
+
+
+
 
 
 

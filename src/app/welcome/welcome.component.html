@@ -1,8 +1,15 @@
 <div class="container bg-white w-96 m-auto pt-6 pb-4 px-4 shadow-xl rounded-xl ">
+
+  <div *ngIf="succeslogin" class="succes absolute top-10 right-4 bg-white text-black  border border-green-500 w-96 py-2 rounded-lg shadow-xl pl-2">
+    You have login successfully pres go to continu
+  </div>
+
+
+
     <!-- <a routerLink="home" class="bg-blue-500 px-4 py-1 rounded-md text-white cursor-pointer" > -->
 
 
-      <div *ngIf="!singup"  class="login">
+       <div *ngIf="!singup"  class="login">
 
 
 
@@ -21,10 +28,12 @@
 
 
         <div class="btns flex space-x-4">
-          <button [disabled]="showError" [ngClass]="showError? 'disabled bg-blue-300 cursor-not-allowed' : '' " class="bg-blue-500 px-4 py-1  rounded-md text-white cursor-pointer w-1/2 text-center" (click)="in()">LogIn</button>
-          <button [ngClass]="showError? 'disabled bg-blue-300 cursor-not-allowed' : '' " class="bg-blue-500 px-4 py-1  rounded-md text-white cursor-pointer w-1/2 text-center">
+          <button   [disabled]="! captchavalide" [ngClass]="showError|| !captchavalide ? 'disabled bg-blue-300 cursor-not-allowed' : '' " class="bg-blue-500 px-4 py-1  rounded-md text-white cursor-pointer w-1/2 text-center" (click)="in()">LogIn</button>
+          <button [ngClass]="showError || !captchavalide ? 'disabled bg-blue-300 cursor-not-allowed' : '' " class="bg-blue-500 px-4 py-1  rounded-md text-white cursor-pointer w-1/2 text-center">
             <a routerLink="home" class="" >Go</a>
           </button>
+
+          <!-- <button  [disabled]="! captchavalide" [ngClass]="!captchavalide? 'disabled bg-blue-300 cursor-not-allowed' : '' ">Captcha</button> -->
 
 
 
@@ -35,7 +44,6 @@
         <p *ngIf="error" class="text-sm text-red-500  mt-2">the data is invalid</p>
 
 
-        <button class="mt-4  text-xs font-medium to hover:text-blue-500" (click)="singup= true"  >you Don't have an account?</button>
 
         <div *ngIf="showWarning" class="p-4 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg relative mt-4 " role="alert">
           <span class="font-medium">Warning!!!</span> You {{5- tryingNumber}} have more tries.
@@ -58,6 +66,21 @@
           u can try in : {{ timeTotryAgain}}
 
         </div>
+
+        <div *ngIf="showReset" class="reset mt-2 text-xs">
+          you forgot you password?
+           <button (click)="resetPassword()" class="text-sm text-blue-500">click here</button> to reset
+        </div>
+
+        <div class="container-fluid py-3">
+
+          <re-captcha (resolved)="resolved($event) " siteKey="6LePfKsiAAAAAJb_s2YyMiXIM0AWOBY0c9YF5V0l"></re-captcha>
+        </div>
+
+
+
+
+        <button class="mt-4  text-xs font-medium to hover:text-blue-500" (click)="singup= true"  >you Don't have an account?</button>
 
       </div>
 
@@ -96,6 +119,6 @@
       </div>
 
 
-      <!-- <button (click)="resetPassword()" class="m-10 p-10 text-red-600">RESET password</button> -->
+       <!-- <button (click)="resetPassword()" class="m-10 p-10 text-red-600">RESET password</button> -->
 
 </div>
