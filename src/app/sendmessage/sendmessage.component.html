@@ -15,13 +15,14 @@
 
   <div class="main flex justify-between ">
 
-    <div class="info w-1/5  border-r-2 mr-4 ">
-      <h4 class="font-medium text-center mb-4">Here u can send a message</h4>
+    <div class="info w-1/5  border-r-2 mr-4 px-4 text-xs ">
+      <h4 class="font-medium text-center mb-4">Welcome, here are some notes about our message services</h4>
 
-      <p class="leading-8 text-gray-800">  You can use a user to send it to</p>
-      <p class="leading-8 text-black font-bold">and chose a methode to crypt your message</p>
-      <p class="leading-8 text-gray-800">all your messages are crypted in our databse</p>
-      <p class="leading-8 text-black font-bold">You can write a meesage or import a file and send it</p>
+      <p class="leading-8 "> &CircleDot;  You can Choose a user to send your message  to.</p>
+      <p class="leading-8 ">&CircleDot; You can  chose a methode to crypt your message.</p>
+      <p class="leading-8 ">&CircleDot; all your messages will be  crypted in our database.</p>
+
+      <p class="leading-8 ">&CircleDot; You can write a meesage or import a file and send it.</p>
 
 
     </div>
@@ -57,8 +58,10 @@
           <select required (change)="yesnoCheck($event.target)" [(ngModel)]="methode" name="methode"  id="methods" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full   p-2.5">
               <option [value] ="0">Miroir</option>
               <option [value] ="1">Affine</option>
-              <option [value] ="2">Decalage</option>
+              <option [value] ="2">Decalage Gauche</option>
               <option [value] ="3">Cesar</option>
+              <option [value] ="4">Decalage Droit</option>
+
           </select>
 
 
@@ -82,9 +85,16 @@
           </div>
       </div>
 
+
+
       <div *ngIf="shown" id="invalueOfn" class="relative z-0 mb-6 w-full group  mt-4">
           <input type="text" name="valueOfn" [(ngModel)]="valueOfn"  id="valueOfn" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
           <label for="valueOfn" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">value of n</label>
+      </div>
+
+      <div *ngIf="showk" class="relative z-0  w-full group">
+        <input  type="text" name="valueOfk" id="valueOfk" [(ngModel)]="valueOfk"   class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+        <label for="valueOfk" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">value of n</label>
       </div>
 
       <label for="toUser" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Send to</label>
@@ -119,7 +129,7 @@
     </div>
 
     <div *ngIf="notValid" class="errors text-xs">
-      <p class="text-red-500 font-medium pl-2">Pleas fill all of the data</p>
+      <p class="text-red-500 font-medium pl-2">Please fill all of the inputs</p>
     </div>
 
     </form>

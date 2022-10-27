@@ -18,8 +18,10 @@ export class WelcomeComponent implements OnInit {
   password="";
   username="";
   email="";
+  notValidForm = true;
+  hacker = false;
 
-  captchavalide = false;
+  captchavalide = true;
 
 
   // test recapatcha
@@ -75,6 +77,18 @@ export class WelcomeComponent implements OnInit {
 
 
   in() {
+
+    if(this.email == '') {
+      console.log('eamil not valid');
+
+      return;
+    }
+
+    if(this.password == '') {
+      console.log('eamil not valid');
+
+      return;
+    }
 
     this.messageService.login(this.email, this.password).subscribe((data: any) => {
 
@@ -259,6 +273,16 @@ export class WelcomeComponent implements OnInit {
       return c
 
   }
+
+
+
+// form;
+
+submitted = false;
+
+onSumit() {
+  this.submitted = true;
+}
 
 
 }

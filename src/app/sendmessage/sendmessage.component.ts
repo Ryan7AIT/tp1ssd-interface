@@ -16,8 +16,11 @@ export class SendmessageComponent implements OnInit {
   valueOfn:any;
   valueOfa:any;
   valueOfb:any;
+
   shown:any = false;
   showAandB = false;
+  showk  = false;
+  valueOfk:any =1;
   cryptedText: any;
   toUser:any ;
   allUsers: any;
@@ -33,6 +36,16 @@ export class SendmessageComponent implements OnInit {
 
 
   send() {
+
+
+    console.log(this.cryptAffine(3,1,"y"));
+    // console.log(this.cryptAffine(3,4,"a"));
+    // console.log(this.cryptAffine(3,4,"n"));
+    console.log('------');
+
+    // return;
+
+
 
     // console.log(this.originalMsg);
 
@@ -68,6 +81,14 @@ export class SendmessageComponent implements OnInit {
     }else if(value.value =="3") {
       this.shown = true
       this.showAandB = false
+    }else if(value.value =="2" || value.value =="2") {
+      this.showAandB = false
+      this.shown = false
+      this.showk = true;
+
+
+
+
     }else {
 
       this.shown = false
@@ -81,6 +102,10 @@ export class SendmessageComponent implements OnInit {
 
   onCrypte() {
 
+
+
+
+
     if(this.originalMsg.length < 1) {
 
       this.notValid = true;
@@ -89,6 +114,19 @@ export class SendmessageComponent implements OnInit {
     }
 
     this.notValid = false
+
+    // console.log(2345);
+
+
+
+    // console.log(this.misroir('rayan'));
+    // console.log(this.misroir('elle'));
+    // console.log(this.misroir('was it a car or a cat i saw'));
+
+
+
+
+    // return;
 
 
     // console.log(this.decalaged("bonjour"));
@@ -103,10 +141,7 @@ export class SendmessageComponent implements OnInit {
 
 
     // console.log(this.cryptAffine(3,4,"b"));
-    // console.log(this.cryptAffine(3,4,"y"));
-    // console.log(this.cryptAffine(3,4,"a"));
-    // console.log(this.cryptAffine(3,4,"n"));
-    console.log('------');
+
 
     // console.log(this.affine("ryan" , 3,4));
 //
@@ -143,7 +178,7 @@ export class SendmessageComponent implements OnInit {
 
 
 
-      this.cryptedText = this.shift(oarry,1,1);
+      this.cryptedText = this.shift(oarry,1,this.valueOfk);
 
 
     }else {
@@ -196,15 +231,64 @@ export class SendmessageComponent implements OnInit {
 
   }
 
+  reverse(s:any) {
+    return s.split("").reverse().join("");
+  }
+
 
   misroir(message:any) {
-    let str = "";
-    for (let index = 0; index < message.length; index++) {
-       str = message[index] + str
+
+    let crypted = "";
+
+    for (let i = 0; i < message.length; i++) {
+
+      crypted = message[i]  + crypted
 
     }
 
-    return str;
+
+    if(crypted == message) {
+
+
+      let strArr = message.split('');
+
+
+      for (let x = 0; x < message.length; x = x+2) {
+
+        // message = this.reverse(message.substr(x,x+2))
+
+        let temp = strArr[x];
+        strArr[x] = strArr[x+1];
+        strArr[x+1] = temp
+
+
+      }
+
+
+      message = strArr.join("")
+
+      message = message + "*";
+
+
+
+
+      return message;
+    }else {
+      return this.reverse(message);
+
+
+    }
+
+
+
+
+    // let str = "";
+    // for (let index = 0; index < message.length; index++) {
+    //    str = message[index] + str
+
+    // }
+
+    // return str;
   }
 
 
@@ -275,15 +359,20 @@ gcd_two_numbers(x:any, y:any): any {
 
 cryptAffine(a:any, b:any, I:any):any {
   var alphabet, x, y;
-  alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+  alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
 
   if(I == ' ') {
     return ' '
   }
 
-  x = alphabet.indexOf(I);
+  x = alphabet.indexOf(I) ;
+
+
   y = this.mod(parseInt((a * x) + (b)),  26);
+
+  console.log(I,y,alphabet[y]);
+
 
 
   return alphabet[y];
@@ -291,23 +380,11 @@ cryptAffine(a:any, b:any, I:any):any {
 
 
 affine(w:any,a:any,b:any): any {
-  // console.log(w,a,b);
 
-  // return;
+  if(a == 0 ) {
 
-
-  // console.log(this.cryptAffine(3,4,w[0]));
-  // console.log(this.cryptAffine(3,4,w[1]));
-  // console.log(this.cryptAffine(3,4,w[2]));
-
-
-
-
-  // return
-
-  // console.log('tesr1' +this.cryptAffine(a,b,"r") );
-  // console.log('tesr2' +this.cryptAffine(3,4,"r") );
-
+    return this.cesar(w,b)
+  }
 
   var word = ' ';
 
@@ -315,12 +392,6 @@ affine(w:any,a:any,b:any): any {
 
 
     for (let  i = 0; i< w.length; i++) {
-      // console.log('tesr2' +this.cryptAffine(a,b,"r") );
-
-      // console.log(a,b,i,w[i],this.cryptAffine(a,b,w[i]));
-//
-
-
       word += this.cryptAffine(parseInt(a), parseInt(b),w[i])
 
     }
@@ -328,9 +399,13 @@ affine(w:any,a:any,b:any): any {
     this.showaffineerror = false;
     return word
 
+  }else if(a == 0) {
+    this.showaffineerror = true;
+    return ""
+
   }else {
     this.showaffineerror = true;
-    return 'it is impossible to encrypt this message. choose a prime number with 26.';
+    return '';
   }
 
 }

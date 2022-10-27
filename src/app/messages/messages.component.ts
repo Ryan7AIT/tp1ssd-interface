@@ -163,6 +163,11 @@ export class MessagesComponent implements OnInit {
 
   daffine(w:any,a:any,b:any): any {
 
+    if(a == 0 ) {
+
+      return this.dcesar(w,b)
+    }
+
 
     // return
 
