@@ -16,6 +16,8 @@ export class Messages2Component implements OnInit {
 
     let name:any = ""
     this.userService.getUser(id).subscribe(data => {
+      console.log(data);
+
       name = data
     }
 
