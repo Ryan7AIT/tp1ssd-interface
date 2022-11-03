@@ -24,13 +24,13 @@ export class  MessageService {
 
 
 
-  setMessages(message: any, method:any,valueofa:any, valueofb:any,valueofn: any,user:any=2):any
+  setMessages(message: any, method:any,valueofa:any, valueofb:any,valueofn: any, valueOfk:any,user:any=2):any
 
 
   {
 
 
-// console.log(user);
+
 
 
     let url="http://tp1ssad.test/api/messages";
@@ -43,6 +43,8 @@ export class  MessageService {
       "valueofa" : valueofa,
       "valueofb" : valueofb,
       "valueofn" : valueofn,
+      "valueofk" : valueOfk,
+
 
     }
     return this.http.post(url,data);

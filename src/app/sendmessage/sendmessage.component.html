@@ -12,6 +12,30 @@
 
   </div>
 
+  <div *ngIf="shownotValid"  class="susscess absolute bg-white border-red-500 py-2 px-4 rounded-lg shadow-lg top-10 right-5 flex justify-between border ">
+    <p>
+      Pleaf fill all of the inputs
+    </p>
+
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mt-1 ml-4 cursor-pointer"
+     (click)="success = false">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+
+  </div>
+
+  <div *ngIf="showaffineerror"  class="susscess absolute bg-white border-red-500 py-2 px-4 rounded-lg shadow-lg top-10 right-5 flex justify-between border ">
+    <p>
+      Please choose <span class="text-blue-500">a</span> as a prime number with 26
+    </p>
+
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mt-1 ml-4 cursor-pointer"
+     (click)="success = false">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+
+  </div>
+
 
   <div class="main flex justify-between ">
 
@@ -36,7 +60,10 @@
         <input type="file" class="file-input mb-2"
         (change)="fileChanged($event)" #fileUpload>
 
-        <button class="block mb-2 text-blue-500" (click)="uploadDocument()">Read file</button>
+        <div class="flex space-x-4">
+          <button class="block mb-2 text-blue-500" (click)="uploadDocument()">Read file</button>
+          <button *ngIf="showFile" (click)="swithTOtext()" class="text-blue-500   rounded-xl px-2 mb-2 ">Swith to text</button>
+        </div>
 
 
 
@@ -47,7 +74,6 @@
       <textarea name="originalMsg"   [(ngModel)]="originalMsg" *ngIf="showFile" readonly id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 " placeholder="{{originalMsg}}"></textarea>
 
 
-      <button *ngIf="showFile" (click)="swithTOtext()" class="bg-blue-500 p-4">Swith to text</button>
 
       <div *ngIf="!showFile" class="relative z-0 mb-6 w-full group">
           <input  [(ngModel)]="originalMsg"  type="text" name="searchTxt" id="searchTxt" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
@@ -92,10 +118,10 @@
           <label for="valueOfn" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">value of n</label>
       </div>
 
-      <div *ngIf="showk" class="relative z-0  w-full group">
+      <!-- <div *ngIf="showk" class="relative z-0  w-full group">
         <input  type="text" name="valueOfk" id="valueOfk" [(ngModel)]="valueOfk"   class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
         <label for="valueOfk" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">value of n</label>
-      </div>
+      </div> -->
 
       <label for="toUser" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Send to</label>
       <select required [(ngModel)]="toUser" name="toUser"  id="toUser" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full   p-2.5">
@@ -125,7 +151,7 @@
     </div>
 
     <div *ngIf="showaffineerror" class="error">
-      <p class="text-xs text-red-500 font-medium pl-2">it is impossible to encrypt this message. choose a prime number with 26.</p>
+      <p class="text-xs text-red-500 font-medium pl-2">Please  choose a prime number with 26.</p>
     </div>
 
     <div *ngIf="notValid" class="errors text-xs">
@@ -136,6 +162,12 @@
 
   </div>
 
+
+  <div *ngIf="showAffineAERROR"  class="fixed bg-white border border-red-500 rounded-lg shadow-xl py-2 px-10 top-10 right-10 transition-all ease-in-out">
+
+    <p>Pleas choose a diffirent value of "a"</p>
+
+  </div>
 
 
 

@@ -18,7 +18,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SendmessageComponent } from './sendmessage/sendmessage.component';
 import { environment } from '../environments/environment';
 import { CaptchaComponent } from './captcha/captcha.component';
-import {RecaptchaModule, RecaptchaFormsModule} from 'ng-recaptcha'
+import {RecaptchaModule, RecaptchaFormsModule} from 'ng-recaptcha';
+import { AttaqueComponent } from './attaque/attaque.component';
+import { Mdps1Component } from './mdps1/mdps1.component';
+import { Mdps2Component } from './mdps2/mdps2.component';
+import { Mdps3Component } from './mdps3/mdps3.component';
+import { StegComponent } from './steg/steg.component';
+import { Messages2Component } from './messages2/messages2.component'
 
 
 @NgModule({
@@ -32,7 +38,13 @@ import {RecaptchaModule, RecaptchaFormsModule} from 'ng-recaptcha'
     MsgDetailsComponent,
     DashboardComponent,
     SendmessageComponent,
-    CaptchaComponent
+    CaptchaComponent,
+    AttaqueComponent,
+    Mdps1Component,
+    Mdps2Component,
+    Mdps3Component,
+    StegComponent,
+    Messages2Component
   ],
   imports: [
     BrowserModule,

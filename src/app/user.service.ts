@@ -14,6 +14,11 @@ export class UserService {
     return this.http.get(url);
   }
 
+  getUser(id:number)  {
+    let url=`http://tp1ssad.test/api/user/${id}`;
+    return this.http.get(url);
+  }
+
   setNewpass(email:any) {
     let url= `http://tp1ssad.test/api/newpassword`;
 

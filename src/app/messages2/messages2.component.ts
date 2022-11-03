@@ -1,30 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from '../message.service';
+import { UserService } from '../user.service';
+
 
 @Component({
-  selector: 'app-messages',
-  templateUrl: './messages.component.html',
-  styleUrls: ['./messages.component.css']
+  selector: 'app-messages2',
+  templateUrl: './messages2.component.html',
+  styleUrls: ['./messages2.component.css']
 })
-export class MessagesComponent implements OnInit {
+export class Messages2Component implements OnInit {
 
-  constructor(private messageService: MessageService) { }
+  constructor(private messageService: MessageService, private userService: UserService) { }
 
-  messages: any;
-  cryptedText:any;
-  dcryptedText:any;
-  isSend= false;
-  methode= 0;
-  valueOfb:any;
-  valueOfa:any;
-  valueOfn:any;
-  valueOfk:any;
+  f(id:number) {
+
+    let name:any = ""
+    this.userService.getUser(id).subscribe(data => {
+      name = data
+    }
 
 
+    )
 
-  ngOnInit(): void {
-    this.getMessages();
+    return 'name is ' + name;
+
   }
+
+
 
 
   getMessages() {
@@ -36,15 +38,63 @@ export class MessagesComponent implements OnInit {
     });
   }
 
+  ngOnInit(): void {
+    this.getMessages();
+
+  }
+
+  yesnoCheck(value:any) {
+
+    console.log(value.value);
+
+
+    if(value.value == "1") {
+      this.showAandB = true
+      this.shown = false
+    }else if(value.value =="3") {
+      this.shown = true
+      this.showAandB = false
+    }else if(value.value =="2" || value.value =="4") {
+      this.showAandB = false
+      this.shown = false
+
+
+
+
+    }else {
+
+      this.shown = false
+      this.showAandB = false
+
+    }
+
+
+  }
+
+
+
+  shown:any = false;
+  showAandB = false;
+  messages: any;
+  cryptedText:any;
+  dcryptedText:any;
+  isSend= false;
+  methode= 0;
+  valueOfb:any;
+  valueOfa:any;
+  valueOfn:any;
+  valueOfk:any;
+
+
   onSend(m: any,va:any,vb:any,vn:any,vk:any) {
 
     // console.log(m,va,vb);
 
 
-    this.valueOfa = va;
-    this.valueOfb = vb;
-    this.valueOfn = vn;
-    this.valueOfk = vk;
+    // this.valueOfa = va;
+    // this.valueOfb = vb;
+    // this.valueOfn = vn;
+    // this.valueOfk = vk;
 
     this.isSend = true;
     this.cryptedText = m;
@@ -57,10 +107,14 @@ export class MessagesComponent implements OnInit {
 
   onDeCrypte() {
 
+    // wcueass
+
     if(this.methode == 0) {
     this.dcryptedText = this.misroir(this.cryptedText)
 
     }else if (this.methode == 1) {
+      console.log('affine wirh: ' + this.valueOfa );
+
 
     this.dcryptedText = this.daffine(this.cryptedText, this.valueOfa,this.valueOfb);
     }else if (this.methode == 2) {
@@ -106,6 +160,7 @@ export class MessagesComponent implements OnInit {
   reverse(s:any) {
     return s.split("").reverse().join("");
   }
+
 
   misroir(message:any) {
 
@@ -203,15 +258,78 @@ export class MessagesComponent implements OnInit {
 
     let x=0;
 
+
+
     while (this.mod(a*x,26) != 1) {
+      console.log('hereeees');
+
       x = x+1;
     }
     return x;
   }
 
+
+  newaffine(w:any,a:any,b:any)
+{
+  var word = ' ';
+
+
+  let i = 0;
+
+  while (i < w.length) {
+
+    if(w[i] == '*') {
+      word += w[i+1]
+      i = i +1
+    }else{
+      // console.log(w[i]);/
+
+      word += this.decryptaffine(parseInt(a), parseInt(b),w[i])
+
+    }
+    i = i +1
+
+
+
+
+  }
+
+  return word;
+
+
+  // for (let  i = 0; i< w.length; i++) {
+
+
+
+  //   if(w[i] == '*') {
+  //     word += '*'
+  //     word += w[i]
+
+  //   }else {
+  //     word += this.decryptaffine(parseInt(a), parseInt(b),w[i])
+  //   }
+
+
+
+
+  // }
+
+  // return word
+}
+
+
   decryptaffine(a:any,b:any,i:any) :any {
 
-    // return;
+
+
+
+
+
+
+
+
+
+
 
     var alphabet=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z",'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
@@ -255,6 +373,17 @@ export class MessagesComponent implements OnInit {
 
   daffine(w:any,a:any,b:any): any {
 
+    let neww = '';
+
+    if(w.slice(-1) == '*') {
+
+      for (let j = 1; j < w.length; j= j+2) {
+        neww += w[j];
+      }
+
+    return neww
+    }
+
     if(a == 0 ) {
 
       return this.dcesar(w,b)
@@ -278,6 +407,11 @@ export class MessagesComponent implements OnInit {
       return word
 
     }else {
+
+      // word = this.newaffine(w,a,b);
+
+      // return word;
+
       return 'it is impossible to encrypt this message. choose a prime number with 26.';
     }
 
@@ -329,98 +463,98 @@ export class MessagesComponent implements OnInit {
 
 }
 
-  // decalge g and D
+    // decalge g and D
 
-  shift(arr:any, direction:any, n:any) {
-    var times = n > arr.length ? n % arr.length : n;
-    let rarray = arr.concat(arr.splice(0, (direction > 0 ? arr.length - times : times)));
+    shift(arr:any, direction:any, n:any) {
+      var times = n > arr.length ? n % arr.length : n;
+      let rarray = arr.concat(arr.splice(0, (direction > 0 ? arr.length - times : times)));
 
-    return rarray.join("");
-    // return arr.concat(arr.splice(0, (direction > 0 ? arr.length - times : times)));
- }
-
-
- decalaged(m:any) {
-
-  let myarr = m.split(" ");
-  let result =""
+      return rarray.join("");
+      // return arr.concat(arr.splice(0, (direction > 0 ? arr.length - times : times)));
+   }
 
 
-  console.log(myarr);
+   decalaged(m:any) {
 
-  for (let j = 0; j < myarr.length; j++) {
-
-    for (let i = 1; i < myarr[j].length; i++) {
-
-      result += myarr[j][i]
-
-    }
-
-    result += myarr[j][0]
-    result += " "
-
-  }
+    let myarr = m.split(" ");
+    let result =""
 
 
-
-  return result;
-
-
-
-
-
- }
-
- decalageg(m:any) {
-
-  let myarr = m.split(" ");
-  let result =""
-
-
-  // bonjour => onjourb  ///droit
-  // bonjour =>rbonjou    ///gauche
-
-
-  // console.log(myarr);
-
-  // for (let j = 0; j < myarr.length; j++) {
-
-    // for (let i = 1; i < myarr[j].length; i++) {
-
+    console.log(myarr);
 
     for (let j = 0; j < myarr.length; j++) {
 
-      result +=  myarr[j][myarr[j].length - 1]
-
-      // m[m.length -1];
-
-
-      for (let i = 0; i < myarr[j].length -1 ; i++) {
+      for (let i = 1; i < myarr[j].length; i++) {
 
         result += myarr[j][i]
 
       }
 
+      result += myarr[j][0]
       result += " "
 
     }
 
-    // result += myarr[j][0]
-    // result += " "
-
-    // result += m[m.length -1 ];
-
-  // }
 
 
-
-  return result;
+    return result;
 
 
 
 
 
- }
+   }
+
+   decalageg(m:any) {
+
+    let myarr = m.split(" ");
+    let result =""
+
+
+    // bonjour => onjourb  ///droit
+    // bonjour =>rbonjou    ///gauche
+
+
+    // console.log(myarr);
+
+    // for (let j = 0; j < myarr.length; j++) {
+
+      // for (let i = 1; i < myarr[j].length; i++) {
+
+
+      for (let j = 0; j < myarr.length; j++) {
+
+        result +=  myarr[j][myarr[j].length - 1]
+
+        // m[m.length -1];
+
+
+        for (let i = 0; i < myarr[j].length -1 ; i++) {
+
+          result += myarr[j][i]
+
+        }
+
+        result += " "
+
+      }
+
+      // result += myarr[j][0]
+      // result += " "
+
+      // result += m[m.length -1 ];
+
+    // }
+
+
+
+    return result;
+
+
+
+
+
+   }
 
 
 }

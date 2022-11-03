@@ -14,6 +14,7 @@ export class WelcomeComponent implements OnInit {
   constructor(private messageService: MessageService, private userService: UserService, private recaptchaV3Service: ReCaptchaV3Service, private _renderer: Renderer2) { }
 
   error = false;
+  canGo = true;
 
   password="";
   username="";
@@ -21,7 +22,8 @@ export class WelcomeComponent implements OnInit {
   notValidForm = true;
   hacker = false;
 
-  captchavalide = true;
+  captchavalide = false;
+  errorUp = false;
 
 
   // test recapatcha
@@ -60,12 +62,25 @@ export class WelcomeComponent implements OnInit {
   showBigError = false;
   succeslogin = false;
 
-  timeTotryAgain = 10;
+  timeTotryAgain = 30;
 
+
+  emailclick = 0;
 
   // reste password
 
   resetPassword(){
+
+    if(this.emailclick == 2) {
+      this.showReset = false;
+      this.hacker = true;
+      this.showBigError = false;
+      return;
+    }
+
+    this.emailclick +=1;
+
+
 
 
     this.userService.setNewpass(this.email).subscribe();
@@ -78,14 +93,21 @@ export class WelcomeComponent implements OnInit {
 
   in() {
 
+
+
     if(this.email == '') {
-      console.log('eamil not valid');
+      // console.log('eamil not valid');
+
+      this.error = true;
 
       return;
     }
 
     if(this.password == '') {
-      console.log('eamil not valid');
+      // console.log('eamil not valid');
+
+      this.error = true;
+
 
       return;
     }
@@ -98,6 +120,8 @@ export class WelcomeComponent implements OnInit {
         localStorage.removeItem("username");
 
       }
+
+      this.canGo = true;
 
 
 
@@ -119,19 +143,29 @@ export class WelcomeComponent implements OnInit {
 
     },(error: any ) => {
 
-      // this.showWarning = true
       this.tryingNumber += 1;
       this.error = true;
 
-      console.log(this.tryingNumber);
-
       if(this.tryingNumber == 3) {
         this.showWarning = true
-      }else if (this.tryingNumber > 4 ) {
+        return;
+      }
+
+      else if (this.tryingNumber == 7) {
+        this.hacker = true;
+        this.showError = false;
+        this.showWarning = false;
+        this.showReset = false;
+
+      }else if (this.tryingNumber == 5 ) {
 
         this.showError = true;
         this.showWarning = false;
         this.timer();
+
+      }else {
+        this.showError = false;
+        this.hacker = false;
 
       }
 
@@ -142,13 +176,34 @@ export class WelcomeComponent implements OnInit {
   }
 
   up() {
-    // console.log(this.emailup);
+    this.error = false
+
+    if(this.emailup == '') {
+      // console.log('eamil not valid');
+
+      this.errorUp = true;
+
+      return;
+    }
+
+    if(this.passwordup == '') {
+      // console.log('eamil not valid');
+
+      this.errorUp = true;
+
+
+      return;
+    }
 
     this.messageService.signup(this.usernameup, this.passwordup,this.emailup).subscribe(() => {
+      this.email = this.emailup;
       this.singup = false;
       this.emailup = '';
       this.usernameup='';
       this.passwordup='';
+    },(error:any)=> {
+      console.log(error);
+
     })
   }
 
@@ -158,27 +213,19 @@ export class WelcomeComponent implements OnInit {
     if(this.timeTotryAgain == 0) {
       return;
     }
-    setInterval( () =>
-        {this.timeTotryAgain -= 1}, 1000);
-
+    setInterval( () => {this.timeTotryAgain -= 1} , 1000);
 
     setTimeout(() => {
 
       this.showError = false;
-      this.timeTotryAgain= 10;
-      this.tryingNumber=0;
+      this.timeTotryAgain= 30;
       this.error = false
-
-    }, 10000);
+    }, 30000);
 
     // this.showBigError = true
 
     this.showReset = true;
 
-    // this.resetPassword();
-
-        //
-        // this.showError = false;
   }
 
   ngOnInit(): void {

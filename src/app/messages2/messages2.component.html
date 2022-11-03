@@ -5,6 +5,7 @@
     <div *ngFor="let msg of messages" class="mesage ">
       <p class="hover:bg-gray-200 py-2 px-4 cursor-pointer" (click)="onSend(msg.message,msg.valueofa,msg.valueofb,msg.valueofn,msg.valueofk)">
         {{ msg.message }}
+        <span>form {{f(msg.user_id)}}</span>
       </p>
     </div>
   </div>
@@ -23,7 +24,7 @@
       </div>
 
       <label for="methods" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Choose a methode to decrypt</label>
-      <select   [(ngModel)]="methode" name="methode"  id="methods" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full   p-2.5">
+      <select   required (change)="yesnoCheck($event.target)" [(ngModel)]="methode" name="methode" id="methods" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full   p-2.5">
           <option [value] ="0">Miroir</option>
           <option [value] ="1">Affine</option>
           <option [value] ="2">DecalageG</option>
@@ -31,6 +32,26 @@
           <option [value] ="4">DecalageD</option>
 
       </select>
+
+      <div *ngIf="showAandB" id="valueOfaAndb" class="grid md:grid-cols-2 md:gap-6 mt-4 ">
+        <div class="relative z-0  w-full group">
+            <input  type="text" name="valueOfa" id="valueOfa" [(ngModel)]="valueOfa"   class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+            <label for="valueOfa" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">value of a</label>
+        </div>
+        <div class="relative z-0  w-full group">
+            <input type="text" name="valueOfb" [(ngModel)]="valueOfb"   id="valueOfb" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+            <label for="valueOfb" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Value of b</label>
+        </div>
+
+    </div>
+
+
+
+    <div *ngIf="shown" id="invalueOfn" class="relative z-0 mb-6 w-full group  mt-4">
+        <input type="text" name="valueOfn" [(ngModel)]="valueOfn"  id="valueOfn" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+        <label for="valueOfn" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">value of n</label>
+    </div>
+
       <div class="relative z-0 mt-4 mb-6 w-full group">
           <input value="{{dcryptedText}}"   readonly  type="text" name="originalWord" id="originalWord" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
           <label  for="resultTxt" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">The decypted message is </label>

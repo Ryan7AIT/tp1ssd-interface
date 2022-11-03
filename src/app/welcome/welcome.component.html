@@ -17,23 +17,30 @@
         <form #inForm="ngForm">
           <div class="">
             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email </label>
-            <input required [(ngModel)]="email" name="email" type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Alice" required="">
+            <input [disabled]="hacker" [ngStyle]="{'border-left': (email.length > 5) ? '5px solid #42A948' : '5px solid #a94442'}"  required [ngClass]="showError   ?  'border-red-500' : '' "  [(ngModel)]="email" name="email" type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Alice" required="">
           </div>
           <div class="mb-6">
             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">password</label>
-            <input required [disabled]="showError" [ngClass]="showError? 'border-red-500' : '' "  [(ngModel)]="password" name="password" type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
+            <input [ngStyle]="{'border-left': (password.length < 3 || error) ? '5px solid #a94442 ' : '5px solid  #42A948'}"  required [disabled]="showError || hacker" [ngClass]="showError  ?  'border-red-500' : '' "  [(ngModel)]="password" name="password" type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
           </div>
 
 
           <div class="btns flex space-x-4">
-            <button type="submit"   [disabled]="! captchavalide" [ngClass]="showError|| !captchavalide || email.length < 3 || password.length < 3? 'disabled bg-blue-300 cursor-not-allowed' : '' " class="bg-blue-500 px-4 py-1  rounded-md text-white cursor-pointer w-1/2 text-center" (click)="in()">LogIn</button>
-            <button [ngClass]="showError || !captchavalide || email.length < 3  || password.length < 3? 'disabled bg-blue-300 cursor-not-allowed' : '' " class="bg-blue-500 px-4 py-1  rounded-md text-white cursor-pointer w-1/2 text-center">
+            <button type="submit"   [disabled]="! captchavalide || hacker" [ngClass]="showError|| !captchavalide || hacker || email.length < 3 || password.length < 3? 'disabled bg-blue-300 cursor-not-allowed' : '' " class="bg-blue-500 px-4 py-1  rounded-md text-white cursor-pointer w-1/2 text-center" (click)="in()">LogIn</button>
+            <button [ngClass]="(showError || !captchavalide || email.length < 3 || hacker  || password.length < 3)  ? 'disabled bg-blue-300 cursor-not-allowed' : '' " class="bg-blue-500 px-4 py-1  rounded-md text-white cursor-pointer w-1/2 text-center">
               <a routerLink="home" class="" >Go</a>
             </button>
           </div>
 
         </form>
 
+        <div *ngIf="hacker"  class="p-4 mt-4  text-sm text-red-700 bg-red-100 rounded-lg" role="alert">
+          <span class="font-medium"></span> Sorry,You seems like you dont own this account
+        </div>
+
+        <div  *ngIf="hacker" class="p-4 mt-4  text-sm text-blue-600 font-medium  rounded-lg" role="alert">
+          <span class="font-medium"></span> this account has been blocked, pleas contact us at <span class="font-bold text-xs text-black">group8@usthb.com</span> to confirm your identity
+        </div>
 
 
 
@@ -69,11 +76,11 @@
            <button (click)="resetPassword()" class="text-sm text-blue-500">click here</button> to reset
         </div>
 
-        <!-- <div class="container-fluid py-3">
+        <div class="container-fluid py-3 ml-5">
 
           <re-captcha (resolved)="resolved($event) " siteKey="6LePfKsiAAAAAJb_s2YyMiXIM0AWOBY0c9YF5V0l"></re-captcha>
         </div>
- -->
+
 
 
 
@@ -99,11 +106,14 @@
 
           <div class="mb-4">
             <label for="passwordup" class="block mb-2 text-sm font-medium text-gray-900 ">password</label>
-            <input [(ngModel)]="passwordup" name="passwordup" type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
+            <input [ngStyle]="{'border-left': (passwordup.length < 4 || error) ? '5px solid #a94442 ' : '5px solid  #42A948'}" [(ngModel)]="passwordup" name="passwordup" type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
           </div>
 
           <button class="bg-blue-500 px-4 py-1  rounded-md text-white cursor-pointer w-full text-center " (click)="up()">SingUp</button>
         </form>
+
+
+        <p *ngIf="errorUp" class="text-sm text-red-500  mt-2">Pleas fill all of the data</p>
 
 
 

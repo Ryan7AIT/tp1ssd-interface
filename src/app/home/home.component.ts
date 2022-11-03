@@ -12,13 +12,15 @@ export class HomeComponent implements OnInit {
 
   user: any = {};
 
+  valueOfK = 1;
+
 
 
   constructor(private messageService: MessageService) { }
 
 
   send() {
-    this.messageService.setMessages(this.cryptedText, this.methode, this.valueOfa,this.valueOfb,this.valueOfn).subscribe();
+    this.messageService.setMessages(this.cryptedText, this.methode, this.valueOfa,this.valueOfb, this.valueOfK,this.valueOfn).subscribe();
   }
 
   getMessages() {

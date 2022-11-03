@@ -15,7 +15,7 @@ export class SendmessageComponent implements OnInit {
   methode: any = 0;
   valueOfn:any;
   valueOfa:any;
-  valueOfb:any;
+  valueOfb:any ;
 
   shown:any = false;
   showAandB = false;
@@ -27,6 +27,11 @@ export class SendmessageComponent implements OnInit {
   success = false;
   notValid = false;
   showaffineerror = false;
+  shownotValid = false;
+
+  // error
+
+  showAffineAERROR= false;
 
   getUsers() {
     this.userService.getUsers().subscribe(users => {
@@ -66,7 +71,7 @@ export class SendmessageComponent implements OnInit {
 
     // console.log(this.cryptedText,this.methode);
 
-    this.messageService.setMessages(this.cryptedText, this.methode, this.valueOfa,this.valueOfb,this.valueOfn,this.toUser).subscribe();
+    this.messageService.setMessages(this.cryptedText, this.methode, this.valueOfa,this.valueOfb,this.valueOfn,this.valueOfk,this.toUser).subscribe();
   }
 
 
@@ -81,7 +86,8 @@ export class SendmessageComponent implements OnInit {
     }else if(value.value =="3") {
       this.shown = true
       this.showAandB = false
-    }else if(value.value =="2" || value.value =="2") {
+      this.showk = false;
+    }else if(value.value =="2" || value.value =="4") {
       this.showAandB = false
       this.shown = false
       this.showk = true;
@@ -91,6 +97,7 @@ export class SendmessageComponent implements OnInit {
 
     }else {
 
+      this.showk = false
       this.shown = false
       this.showAandB = false
 
@@ -103,85 +110,85 @@ export class SendmessageComponent implements OnInit {
   onCrypte() {
 
 
+    // console.log(this.decalageg('salute bonjour'));
 
 
 
-    if(this.originalMsg.length < 1) {
+
+
+    this.cryptedText = ""
+
+
+
+
+
+
+
+
+    if(this.originalMsg.length < 1  ) {
 
       this.notValid = true;
+      this.shownotValid = true;
+      setTimeout(() => {
+        this.shownotValid = false;
+      }, 3000);
 
       return;
     }
 
+
+
     this.notValid = false
-
-    // console.log(2345);
-
-
-
-    // console.log(this.misroir('rayan'));
-    // console.log(this.misroir('elle'));
-    // console.log(this.misroir('was it a car or a cat i saw'));
-
-
-
-
-    // return;
-
-
-    // console.log(this.decalaged("bonjour"));
-    // console.log(this.shift(['b', 'o', 'n', 'j', 'o' , 'u' , 'r'], 1,1));
-
-    // return;
-
-
-
-
-    // console.log(this.affine("ryan" , 5,3));
-
-
-    // console.log(this.cryptAffine(3,4,"b"));
-
-
-    // console.log(this.affine("ryan" , 3,4));
-//
-
-
-
-
-
-
-
-    // return
-
-    // console.log(this.gcd_two_numbers(4,26));
-
 
     if(this.methode == "0") {
       this.cryptedText = this.misroir(this.originalMsg)
     }else if (this.methode == "1") {
+
+
+      if( isNaN(this.valueOfa) || isNaN(this.valueOfb) ) {
+
+        this.notValid = true;
+        this.shownotValid = true;
+        setTimeout(() => {
+          this.shownotValid = false;
+        }, 3000);
+
+        return;
+      }
+
       this.cryptedText = this.affine(this.originalMsg,this.valueOfa,this.valueOfb)
-      // console.log(this.originalMsg,this.cryptedText);
-
-
-
-
-      // this.cryptedText = "function on progress...";
 
     }else if (this.methode == "2") {
 
-      let oarry = this.originalMsg.split("");
-
-      // console.log(oarry);
-
-      // return
+      // let oarry = this.originalMsg.split("");
 
 
+      // this.cryptedText = this.shift(oarry,-1,this.valueOfk);
 
-      this.cryptedText = this.shift(oarry,1,this.valueOfk);
+      this.cryptedText = this.decalageg(this.originalMsg);
+
+
+    }else if (this.methode == "4") {
+
+      // let oarry = this.originalMsg.split("");
+
+      this.cryptedText = this.decalaged(this.originalMsg);
+
+      // this.cryptedText = this.shift(oarry,1,this.valueOfk);
 
 
     }else {
+      if( isNaN(this.valueOfn) ) {
+        this.shownotValid = true;
+
+        this.notValid = true;
+
+        setTimeout(() => {
+          this.shownotValid = false;
+        }, 3000);
+
+        return;
+      }
       this.cryptedText = this.cesar(this.originalMsg, this.valueOfn);
     }
 
@@ -305,7 +312,85 @@ export class SendmessageComponent implements OnInit {
 
 
 
+ // decalage
+
  decalaged(m:any) {
+
+  let myarr = m.split(" ");
+  let result =""
+
+
+  console.log(myarr);
+
+  for (let j = 0; j < myarr.length; j++) {
+
+    for (let i = 1; i < myarr[j].length; i++) {
+
+      result += myarr[j][i]
+
+    }
+
+    result += myarr[j][0]
+    result += " "
+
+  }
+
+
+
+  return result;
+
+
+
+
+
+ }
+
+ decalageg(m:any) {
+
+  let myarr = m.split(" ");
+  let result =""
+
+
+  // bonjour => onjourb  ///droit
+  // bonjour =>rbonjou    ///gauche
+
+
+  // console.log(myarr);
+
+  // for (let j = 0; j < myarr.length; j++) {
+
+    // for (let i = 1; i < myarr[j].length; i++) {
+
+
+    for (let j = 0; j < myarr.length; j++) {
+
+      result +=  myarr[j][myarr[j].length - 1]
+
+      // m[m.length -1];
+
+
+      for (let i = 0; i < myarr[j].length -1 ; i++) {
+
+        result += myarr[j][i]
+
+      }
+
+      result += " "
+
+    }
+
+    // result += myarr[j][0]
+    // result += " "
+
+    // result += m[m.length -1 ];
+
+  // }
+
+
+
+  return result;
+
+
 
 
 
@@ -379,11 +464,50 @@ cryptAffine(a:any, b:any, I:any):any {
 }
 
 
+newaffine(w:any,a:any,b:any)
+{
+  var word = ' ';
+
+  let all:any= []
+
+
+
+  for (let  i = 0; i< w.length; i++) {
+    const randomElement = w[Math.floor(Math.random() * w.length)];
+
+
+
+      word += randomElement
+      word += w[i]
+
+  }
+
+  this.showaffineerror = false;
+  return word + '*'
+}
+
 affine(w:any,a:any,b:any): any {
+
+
+  if(a == 1 ) {
+
+
+    return this.cesar(w,b)
+  }
 
   if(a == 0 ) {
 
-    return this.cesar(w,b)
+    this.showAffineAERROR = true;
+
+    setTimeout(() => {
+      this.showAffineAERROR = false;
+
+    }, 3000);
+
+
+    this.showaffineerror = true;
+
+    return ;
   }
 
   var word = ' ';
@@ -404,6 +528,8 @@ affine(w:any,a:any,b:any): any {
     return ""
 
   }else {
+    word = this.newaffine(w,a,b)
+    return word
     this.showaffineerror = true;
     return '';
   }
