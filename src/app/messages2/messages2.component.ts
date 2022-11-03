@@ -14,17 +14,17 @@ export class Messages2Component implements OnInit {
 
   f(id:number) {
 
-    let name:any = ""
-    this.userService.getUser(id).subscribe(data => {
-      console.log(data);
+    // let name:any = ""
+    // this.userService.getUser(id).subscribe(data => {
+    //   console.log(data);
 
-      name = data
-    }
+    //   name = data
+    // }
 
 
-    )
+    // )
 
-    return 'name is ' + name;
+    // return 'name is ' + name;
 
   }
 
