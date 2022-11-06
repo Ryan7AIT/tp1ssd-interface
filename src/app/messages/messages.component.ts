@@ -213,7 +213,7 @@ export class MessagesComponent implements OnInit {
 
     // return;
 
-    var alphabet=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z",'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+    var alphabet=['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
     if(i == " ") {
       return " "
@@ -241,7 +241,6 @@ export class MessagesComponent implements OnInit {
 
     // let y = parseInt((a * x) + (b)) % 26;
 
-    console.log(y,alphabet[y]);
 
 
 
@@ -272,12 +271,47 @@ export class MessagesComponent implements OnInit {
 
 
         word += this.decryptaffine(a,b,w[i])
-        console.log(word);
       }
 
       return word
 
     }else {
+
+      let newa:any;
+
+      if(a == 15) {
+        newa = [12.3]
+      }else {
+         newa = this.decomposeaffine(a);
+      }
+
+
+
+      let ow = "";
+      let nw = "";
+
+
+
+
+
+      // console.log(this.cryptAffine(3, 2,'a'));
+
+      for (let  i = 0; i< w.length; i++) {
+
+          ow  += this.decryptaffine(newa[1], parseInt(b),w[i])
+        }
+
+        for (let  i = 0; i< w.length; i++) {
+          nw += this.decryptaffine(newa[0], parseInt(b),ow[i])
+        }
+
+
+
+      return nw;
+
+
+
+
       return 'it is impossible to encrypt this message. choose a prime number with 26.';
     }
 
@@ -423,4 +457,15 @@ export class MessagesComponent implements OnInit {
  }
 
 
+
+ decomposeaffine(a:number) {
+
+  let result = [];
+
+  result.push(a-1,1)
+
+  return result;
+
+
+}
 }

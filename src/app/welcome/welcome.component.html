@@ -106,7 +106,7 @@
 
           <div class="mb-4">
             <label for="passwordup" class="block mb-2 text-sm font-medium text-gray-900 ">password</label>
-            <input [ngStyle]="{'border-left': (passwordup.length < 4 || error) ? '5px solid #a94442 ' : '5px solid  #42A948'}" [(ngModel)]="passwordup" name="passwordup" type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
+            <input [ngStyle]="{'border-left': (passwordup.length < 6 || error) ? '5px solid #a94442 ' : '5px solid  #42A948'}" [(ngModel)]="passwordup" name="passwordup" type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="">
           </div>
 
           <button class="bg-blue-500 px-4 py-1  rounded-md text-white cursor-pointer w-full text-center " (click)="up()">SingUp</button>

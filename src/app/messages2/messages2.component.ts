@@ -12,24 +12,6 @@ export class Messages2Component implements OnInit {
 
   constructor(private messageService: MessageService, private userService: UserService) { }
 
-  f(id:number) {
-
-    // let name:any = ""
-    // this.userService.getUser(id).subscribe(data => {
-    //   console.log(data);
-
-    //   name = data
-    // }
-
-
-    // )
-
-    // return 'name is ' + name;
-
-  }
-
-
-
 
   getMessages() {
 
@@ -89,14 +71,6 @@ export class Messages2Component implements OnInit {
 
 
   onSend(m: any,va:any,vb:any,vn:any,vk:any) {
-
-    // console.log(m,va,vb);
-
-
-    // this.valueOfa = va;
-    // this.valueOfb = vb;
-    // this.valueOfn = vn;
-    // this.valueOfk = vk;
 
     this.isSend = true;
     this.cryptedText = m;
@@ -375,17 +349,6 @@ export class Messages2Component implements OnInit {
 
   daffine(w:any,a:any,b:any): any {
 
-    let neww = '';
-
-    if(w.slice(-1) == '*') {
-
-      for (let j = 1; j < w.length; j= j+2) {
-        neww += w[j];
-      }
-
-    return neww
-    }
-
     if(a == 0 ) {
 
       return this.dcesar(w,b)
@@ -403,16 +366,46 @@ export class Messages2Component implements OnInit {
 
 
         word += this.decryptaffine(a,b,w[i])
-        console.log(word);
       }
 
       return word
 
     }else {
 
-      // word = this.newaffine(w,a,b);
+      let newa:any;
 
-      // return word;
+      if(a == 15) {
+        newa = [12.3]
+      }else {
+         newa = this.decomposeaffine(a);
+      }
+
+
+
+      let ow = "";
+      let nw = "";
+
+
+
+
+
+      // console.log(this.cryptAffine(3, 2,'a'));
+
+      for (let  i = 0; i< w.length; i++) {
+
+          ow  += this.decryptaffine(newa[1], parseInt(b),w[i])
+        }
+
+        for (let  i = 0; i< w.length; i++) {
+          nw += this.decryptaffine(newa[0], parseInt(b),ow[i])
+        }
+
+
+
+      return nw;
+
+
+
 
       return 'it is impossible to encrypt this message. choose a prime number with 26.';
     }
@@ -558,5 +551,16 @@ export class Messages2Component implements OnInit {
 
    }
 
+
+   decomposeaffine(a:number) {
+
+    let result = [];
+
+    result.push(a-1,1)
+
+    return result;
+
+
+  }
 
 }

@@ -116,6 +116,10 @@ export class SendmessageComponent implements OnInit {
 
 
 
+
+
+
+
     this.cryptedText = ""
 
 
@@ -221,10 +225,8 @@ export class SendmessageComponent implements OnInit {
 
           c = c + numbers[this.mod( parseInt(k) + numbers.indexOf((message[n])),10)]
         }else {
-          console.log(message[n],dict[message[n]]);
 
             c1 = ( parseInt(dict[message[n]]) + parseInt(k))
-            console.log(c1,c2,alphabet[c2]);
 
 
             c2 = this.mod(c1,26)
@@ -456,7 +458,6 @@ cryptAffine(a:any, b:any, I:any):any {
 
   y = this.mod(parseInt((a * x) + (b)),  26);
 
-  console.log(I,y,alphabet[y]);
 
 
 
@@ -528,14 +529,95 @@ affine(w:any,a:any,b:any): any {
     return ""
 
   }else {
-    word = this.newaffine(w,a,b)
-    return word
+    // word = this.newaffine(w,a,b)
+    // return word
+
+
+    if(a==15) {
+
+      let ow = "";
+      let nw = "";
+
+
+
+      let newa = [12,3]
+
+
+      // console.log(this.cryptAffine(3, 2,'a'));
+
+      for (let  i = 0; i< w.length; i++) {
+
+          ow  += this.cryptAffine(newa[0], parseInt(b),w[i])
+        }
+
+        for (let  i = 0; i< w.length; i++) {
+          nw += this.cryptAffine(newa[1], parseInt(b),ow[i])
+        }
+
+
+
+      return nw;
+
+
+
+    }
+
+    let ow = "";
+    let nw = "";
+
+
+
+    let newa = this.decomposeaffine(parseInt(a));
+
+
+    // console.log(this.cryptAffine(3, 2,'a'));
+
+    for (let  i = 0; i< w.length; i++) {
+
+        ow  += this.cryptAffine(newa[0], parseInt(b),w[i])
+      }
+
+      for (let  i = 0; i< w.length; i++) {
+        nw += this.cryptAffine(newa[1], parseInt(b),ow[i])
+      }
+
+
+
+    return nw;
+
+
+
+
+
+
+
+
+
+
+
+
+
     this.showaffineerror = true;
     return '';
   }
 
 }
 
+
+
+
+
+
+decomposeaffine(a:number) {
+
+  let result = [];
+
+  result.push(a-1,1)
+
+  return result;
+
+
+}
 
 swithTOtext() {
   this.showFile = false;
@@ -581,6 +663,10 @@ uploadDocument() {
     this.getUsers();
     this.notValid = false;
   }
+
+
+
+
 
 
 }
