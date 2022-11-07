@@ -91,17 +91,6 @@ export class MessagesComponent implements OnInit {
   }
 
 
-  // decrytion methode
-
-  // misroir(message:any) {
-  //   let str = "";
-  //   for (let index = 0; index < message.length; index++) {
-  //      str = message[index] + str
-
-  //   }
-
-  //   return str;
-  // }
 
   reverse(s:any) {
     return s.split("").reverse().join("");
@@ -219,29 +208,11 @@ export class MessagesComponent implements OnInit {
       return " "
     }
 
-    // console.log(i,alphabet.indexOf(i));
-
     // return
 
     let x = alphabet.indexOf(i);
 
-
-    // console.log('a and inver of a ' + a,this.inverse(a));
-
-    // console.log('-----------');
-
-
-
-
-
-    // return
-
     let y = this.mod((this.inverse(parseInt(a)) * (x-b)),26)
-
-
-    // let y = parseInt((a * x) + (b)) % 26;
-
-
 
 
     return alphabet[y];
@@ -260,9 +231,6 @@ export class MessagesComponent implements OnInit {
     }
 
 
-    // return
-
-
     var word = ' ';
 
     if ( this.gcd_two_numbers(a,26)  == 1) {
@@ -279,40 +247,21 @@ export class MessagesComponent implements OnInit {
 
       let newa:any;
 
-      if(a == 15) {
-        newa = [12.3]
-      }else {
-         newa = this.decomposeaffine(a);
-      }
-
-
+      newa = this.decomposeaffine(a);
 
       let ow = "";
       let nw = "";
 
-
-
-
-
-      // console.log(this.cryptAffine(3, 2,'a'));
+      for (let  i = 0; i< w.length; i++) {
+          ow  += this.decryptaffine(newa[1], parseInt(b),w[i])
+      }
 
       for (let  i = 0; i< w.length; i++) {
-
-          ow  += this.decryptaffine(newa[1], parseInt(b),w[i])
-        }
-
-        for (let  i = 0; i< w.length; i++) {
-          nw += this.decryptaffine(newa[0], parseInt(b),ow[i])
-        }
-
-
+        nw += this.decryptaffine(newa[0], parseInt(b),ow[i])
+      }
 
       return nw;
 
-
-
-
-      return 'it is impossible to encrypt this message. choose a prime number with 26.';
     }
 
   }
@@ -458,14 +407,19 @@ export class MessagesComponent implements OnInit {
 
 
 
- decomposeaffine(a:number) {
+ decomposeaffine(a:number, n=1):any {
 
   let result = [];
 
-  result.push(a-1,1)
-
-  return result;
+  if(this.gcd_two_numbers(a,26) == 1 ) {
+    result.push(a,n-1)
+    return result
+  }else {
+    return this.decomposeaffine(a-1,n+1);
+  }
 
 
 }
+
+
 }

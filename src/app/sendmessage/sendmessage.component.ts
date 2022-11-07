@@ -506,8 +506,6 @@ affine(w:any,a:any,b:any): any {
     }, 3000);
 
 
-    this.showaffineerror = true;
-
     return ;
   }
 
@@ -524,43 +522,8 @@ affine(w:any,a:any,b:any): any {
     this.showaffineerror = false;
     return word
 
-  }else if(a == 0) {
-    this.showaffineerror = true;
-    return ""
-
   }else {
-    // word = this.newaffine(w,a,b)
-    // return word
 
-
-    if(a==15) {
-
-      let ow = "";
-      let nw = "";
-
-
-
-      let newa = [12,3]
-
-
-      // console.log(this.cryptAffine(3, 2,'a'));
-
-      for (let  i = 0; i< w.length; i++) {
-
-          ow  += this.cryptAffine(newa[0], parseInt(b),w[i])
-        }
-
-        for (let  i = 0; i< w.length; i++) {
-          nw += this.cryptAffine(newa[1], parseInt(b),ow[i])
-        }
-
-
-
-      return nw;
-
-
-
-    }
 
     let ow = "";
     let nw = "";
@@ -586,19 +549,6 @@ affine(w:any,a:any,b:any): any {
     return nw;
 
 
-
-
-
-
-
-
-
-
-
-
-
-    this.showaffineerror = true;
-    return '';
   }
 
 }
@@ -608,13 +558,16 @@ affine(w:any,a:any,b:any): any {
 
 
 
-decomposeaffine(a:number) {
+decomposeaffine(a:number, n=1):any {
 
   let result = [];
 
-  result.push(a-1,1)
-
-  return result;
+  if(this.gcd_two_numbers(a,26) == 1 ) {
+    result.push(a,n-1)
+    return result
+  }else {
+    return this.decomposeaffine(a-1,n+1);
+  }
 
 
 }

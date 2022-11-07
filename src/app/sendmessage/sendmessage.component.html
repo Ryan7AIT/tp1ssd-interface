@@ -84,9 +84,9 @@
           <select required (change)="yesnoCheck($event.target)" [(ngModel)]="methode" name="methode"  id="methods" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full   p-2.5">
               <option [value] ="0">Miroir</option>
               <option [value] ="1">Affine</option>
-              <option [value] ="2">Decalage Gauche</option>
+              <option [value] ="2">Decalage a Droit </option>
               <option [value] ="3">Cesar</option>
-              <option [value] ="4">Decalage Droit</option>
+              <option [value] ="4">Decalage a Gauche</option>
 
           </select>
 
@@ -148,10 +148,6 @@
       <div class="relative z-0 mb-6 w-full group">
         <input readonly type="text" name="cryptedText" [(ngModel)]="cryptedText"   id="cryptedText" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
         <label for="cryptedText" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">the crypted text (for showcase):</label>
-    </div>
-
-    <div *ngIf="showaffineerror" class="error">
-      <p class="text-xs text-red-500 font-medium pl-2">Please  choose a prime number with 26.</p>
     </div>
 
     <div *ngIf="notValid" class="errors text-xs">

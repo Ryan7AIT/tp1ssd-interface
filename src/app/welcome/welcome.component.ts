@@ -31,7 +31,15 @@ export class WelcomeComponent implements OnInit {
 
   resolved(token:any) {
 
-    this.captchavalide = true;
+    console.log(token);
+
+    if(token) {
+      this.captchavalide = true;
+    }else {
+      this.captchavalide = false;
+    }
+
+
 
 
   }
