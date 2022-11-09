@@ -1,4 +1,4 @@
-<div class="attaque1 bg-white flex justify-between">
+<!-- <div class="attaque1 bg-white flex justify-between">
 
 
   <form class="m-10 p-10 w-1/2" >
@@ -14,6 +14,7 @@
 
         <button class="block mb-2 text-blue-500" (click)="uploadDocument()">Read file</button>
 
+      <button class="bg-blue-500 rounded-lg px-4 py-1 text-white mt-4 shadow-md" (click)="attaque()">Attaque</button>
 
 
 
@@ -33,5 +34,19 @@
       <h4 class="text-center">Possible password</h4>
       <p class="ml-10" *ngFor="let mdps of posibilities" >{{ mdps }}</p>
   </div>
+
+</div> -->
+
+
+<div class="file flex ">
+
+  <input type="file" class="file-input mb-2"
+  (change)="fileChanged($event)" #fileUpload>
+
+  <button class="block mb-2 text-blue-500" (click)="uploadDocument()">Read file</button>
+
+<button class="bg-blue-500 rounded-lg px-4 py-1 text-white mt-4 shadow-md" (click)="attaque()">Attaque</button>
+
+
 
 </div>

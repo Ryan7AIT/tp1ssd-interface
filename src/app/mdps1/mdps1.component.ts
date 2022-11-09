@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-mdps1',
@@ -12,7 +12,9 @@ export class Mdps1Component implements OnInit {
   ngOnInit(): void {
   }
 
-  password:any = '';
+  // :any = '';
+
+  @Input() password: any
   shows = false;
   l = ['0','1'];
   seconds: any;
@@ -31,6 +33,9 @@ export class Mdps1Component implements OnInit {
     }
 
     check(p:any,password:any){
+      console.log(p);
+
+
       if(password == p) {
         console.log('the following password has been cracked:' + p)
         this.shows = true
@@ -42,6 +47,7 @@ export class Mdps1Component implements OnInit {
     }
 
     attaque() {
+
 
       let p;
 
@@ -77,6 +83,8 @@ export class Mdps1Component implements OnInit {
 
               this.seconds = time;
 
+              console.log("time: " + this.seconds + "ms");
+
 
               // console.log('cracked in' +(time )  + 'seccond');
 
@@ -97,7 +105,6 @@ export class Mdps1Component implements OnInit {
 
       }
 
-      console.log('end');
 
     }
 

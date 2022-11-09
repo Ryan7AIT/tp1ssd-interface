@@ -24,7 +24,8 @@ import { Mdps1Component } from './mdps1/mdps1.component';
 import { Mdps2Component } from './mdps2/mdps2.component';
 import { Mdps3Component } from './mdps3/mdps3.component';
 import { StegComponent } from './steg/steg.component';
-import { Messages2Component } from './messages2/messages2.component'
+import { Messages2Component } from './messages2/messages2.component';
+import { Mdps4Component } from './mdps4/mdps4.component'
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { Messages2Component } from './messages2/messages2.component'
     Mdps2Component,
     Mdps3Component,
     StegComponent,
-    Messages2Component
+    Messages2Component,
+    Mdps4Component
   ],
   imports: [
     BrowserModule,

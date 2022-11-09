@@ -15,6 +15,7 @@ export class AttaqueComponent implements OnInit {
   show1 = true;
   show2 = false;
   show3 = false;
+  show4 = false;
 
 
   ngOnInit(): void {

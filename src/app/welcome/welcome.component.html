@@ -75,12 +75,12 @@
           you forgot you password?
            <button (click)="resetPassword()" class="text-sm text-blue-500">click here</button> to reset
         </div>
-
+<!--
         <div class="container-fluid py-3 ml-5">
 
           <re-captcha (resolved)="resolved($event) " siteKey="6LePfKsiAAAAAJb_s2YyMiXIM0AWOBY0c9YF5V0l"></re-captcha>
         </div>
-
+ -->
 
 
 
@@ -120,6 +120,21 @@
 
 
           <button class="mt-4  text-xs font-medium to hover:text-blue-500" (click)="singup= false"  >You already have an account?</button>
+
+
+
+      </div>
+
+
+      <div class="ataque">
+        <div class="h2">try to hack :</div>
+        <app-mdps1 [password]="password"></app-mdps1>
+        <app-mdps2 [password]="password"></app-mdps2>
+        <app-mdps3 [password]="password"></app-mdps3>
+
+        <!-- <button (click)="attaque()" class="bg-blue-500 px-4 py-2 rounded-xl">attaque 1</button>
+        <button (click)="attaque()" class="bg-blue-500 px-4 py-2 rounded-xl">click</button>
+        <button (click)="attaque()" class="bg-blue-500 px-4 py-2 rounded-xl">click</button> -->
 
 
 

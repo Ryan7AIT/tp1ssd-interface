@@ -1,22 +1,35 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-mdps2',
-  templateUrl: './mdps2.component.html',
-  styleUrls: ['./mdps2.component.css']
+  selector: 'app-mdps4',
+  templateUrl: './mdps4.component.html',
+  styleUrls: ['./mdps4.component.css']
 })
-export class Mdps2Component implements OnInit {
+export class Mdps4Component implements OnInit {
 
   constructor() { }
 
-  @Input() password: any
+  password:any;
   posibilities:any = [];
   shows = false;
   seconds:any;
   l = ['0','1','2','3','4','5','6','7','8','9']
 
+  AllChars:any = [];
+
+
+  getAll() {
+    for (var i=32; i<127; i++)
+    this.AllChars += String.fromCharCode(i)
+  }
+
+
+
 
   ngOnInit(): void {
+    this.getAll()
+    console.log(this.AllChars);
+
   }
 
 
@@ -30,13 +43,7 @@ export class Mdps2Component implements OnInit {
   }
 
   check(p:any, password:any) {
-    console.log(p);
-
     if(p == password) {
-
-
-      console.log('the following password has been cracked:' + p)
-
 
       // console.log('you passors is cracked');
       return true;
@@ -58,37 +65,33 @@ export class Mdps2Component implements OnInit {
 
 
 
-    for (let a = 0; a < this.l.length; a++) {
+    for (let a = 0; a < this.AllChars.length; a++) {
 
-      for (let b = 0; b < this.l.length; b++) {
+      for (let b = 0; b < this.AllChars.length; b++) {
 
-        for (let c = 0; c < this.l.length; c++) {
+        for (let c = 0; c < this.AllChars.length; c++) {
 
-          for (let d = 0; d < this.l.length; d++) {
+          for (let d = 0; d < this.AllChars.length; d++) {
 
-            for (let e = 0; e < this.l.length; e++) {
+            for (let e = 0; e < this.AllChars.length; e++) {
 
               p = this.l[a] + this.l[b] + this.l[c] + this.l[d] + this.l[e];
               this.posibilities.push(p)
 
 
 
+
               if(this.check(p,this.password)) {
         const millis = Date.now() - start;
 
-        console.log(millis + "mss");
-
-
 
           var endTime  = performance.now()
-      // console.log( Date.now());
+      console.log( Date.now());
 
 
           // this.seconds = endTime - startTime
 
           this.seconds = endTime - startTime;
-
-
 
 
 
@@ -113,5 +116,6 @@ export class Mdps2Component implements OnInit {
     }
 
   }
+
 
 }

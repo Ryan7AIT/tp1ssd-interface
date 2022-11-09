@@ -65,25 +65,13 @@ export class MessagesComponent implements OnInit {
     this.dcryptedText = this.daffine(this.cryptedText, this.valueOfa,this.valueOfb);
     }else if (this.methode == 2) {
 
-      // let oarry = this.cryptedText.split("");
-
-      // this.dcryptedText = this.shift(oarry,1,this.valueOfk);
-
-
       this.dcryptedText = this.decalaged(this.cryptedText);
-
 
     }else if (this.methode == 4) {
 
-      // let oarry = this.cryptedText.split("");
-
-      // this.dcryptedText = this.shift(oarry,-1,this.valueOfk);
-
       this.dcryptedText = this.decalageg(this.cryptedText);
 
-
     }
-
     else{
       this.dcryptedText = this.dcesar(this.cryptedText,this.valueOfn);
     }
@@ -102,8 +90,6 @@ export class MessagesComponent implements OnInit {
 
 
     if(message.slice(-1) == '*' ){
-      console.log(12345678);
-
       let strArr = message.split('');
 
 
@@ -112,6 +98,7 @@ export class MessagesComponent implements OnInit {
         let temp = strArr[x];
         strArr[x] = strArr[x+1];
         strArr[x+1] = temp
+
 
       }
 

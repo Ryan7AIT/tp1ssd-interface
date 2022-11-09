@@ -498,12 +498,14 @@ affine(w:any,a:any,b:any): any {
 
   if(a == 0 ) {
 
-    this.showAffineAERROR = true;
+    return this.cesar(w,b)
 
-    setTimeout(() => {
-      this.showAffineAERROR = false;
+    // this.showAffineAERROR = true;
 
-    }, 3000);
+    // setTimeout(() => {
+    //   this.showAffineAERROR = false;
+
+    // }, 3000);
 
 
     return ;

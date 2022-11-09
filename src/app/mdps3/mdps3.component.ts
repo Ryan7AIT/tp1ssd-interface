@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-mdps3',
@@ -9,7 +9,9 @@ export class Mdps3Component implements OnInit {
 
   constructor() { }
 
-  password:any;
+  // :any;
+
+  @Input() password:any;
   passwords:any;
   seconds:any;
   shows=false;
@@ -93,9 +95,15 @@ uploadDocument() {
 
 
     for (let i = 0; i < this.passwords.length; i++) {
+      console.log(this.passwords[i]);
+
 
 
       if(this.password == this.passwords[i]) {
+
+        console.log('the following password has been cracked:' + this.passwords[i])
+
+
 
         const millis = Date.now() - start;
 
@@ -107,6 +115,9 @@ uploadDocument() {
         // this.seconds = endTime - startTime
 
         this.seconds = millis
+
+        console.log("time: " + this.seconds + "ms");
+
 
 
 

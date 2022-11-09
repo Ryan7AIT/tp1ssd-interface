@@ -1,4 +1,4 @@
-<!-- <div class="attaque1 bg-white flex justify-between">
+<div class="attaque1 bg-white flex justify-between">
 
 
   <form class="m-10 p-10 w-1/2" >
@@ -14,14 +14,13 @@
     <button class="bg-blue-500 rounded-lg px-4 py-1 text-white mt-4 shadow-md" (click)="attaque()">Attaque</button>
 
     <p *ngIf="shows" class="text-red-500 font-bold">Your password <span class="text-blue-500">({{password}})</span> has been cracked in {{seconds}} <span class="text-xs">ms</span></p>
+
+
   </form>
 
   <div class="result w-1/2 bg-gray-100 h-96 overflow-y-scroll">
-      <h4 class="text-center">Possible passwords:</h4>
+      <h4 class="text-center">Possible password</h4>
       <p class="ml-10" *ngFor="let mdps of posibilities" >{{ mdps }}</p>
   </div>
 
-</div> -->
-
-<button class="bg-blue-500 rounded-lg px-4 py-1 text-white mt-4 shadow-md" (click)="attaque()">Attaque</button>
-
+</div>
